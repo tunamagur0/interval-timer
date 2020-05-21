@@ -8,14 +8,12 @@
       <v-spacer></v-spacer>
 
       <v-btn v-if="canSetTime" icon @click="showTimeSetting = !showTimeSetting">
-        <v-icon>{{
-          showTimeSetting ? "mdi-chevron-up" : "mdi-chevron-down"
-        }}</v-icon>
+        <v-icon>{{ showTimeSetting ? "mdi-chevron-up" : "mdi-cog" }}</v-icon>
       </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
-      <div v-show="showTimeSetting">
+      <div v-show="showTimeSetting && canSetTime">
         <v-divider></v-divider>
         <v-slider v-model="minutes" :max="59" :min="0" class="align-center">
           <template v-slot:append>
@@ -42,10 +40,15 @@ export default class Timer extends Vue {
   @Prop() private canSetTime!: boolean;
   @Prop() private isActive!: boolean;
   // timeLimit[s]
-  private timeLimit = 30;
+  @Prop() private timeLimitProps!: number;
+  public timeLimit = 0;
   private currentTime = 0;
   private timerId = -1;
   private showTimeSetting = false;
+
+  created() {
+    this.timeLimit = this.timeLimitProps;
+  }
 
   private start() {
     this.timerId = setInterval(() => {

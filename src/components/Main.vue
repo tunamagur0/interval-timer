@@ -8,7 +8,7 @@
         <Timer
           ref="leftTimer"
           :isActive="isLeftActive"
-          :timeLimit="timeLimits[0]"
+          :timeLimitProps="timeLimits[0]"
           :canSetTime="canSetTime"
           @finish="onFinish"
         />
@@ -17,7 +17,7 @@
         <Timer
           ref="rightTimer"
           :isActive="isRightActive"
-          :timeLimit="timeLimits[1]"
+          :timeLimitProps="timeLimits[1]"
           :canSetTime="canSetTime"
           @finish="onFinish"
         />
@@ -49,9 +49,23 @@ export default class Main extends Vue {
   private activeTimer = 0;
   private inactiveTimer = 0;
   private timeLimits: [number, number] = [10, 10];
+  created() {
+    const limits: string | null = localStorage.getItem("timeLimits");
+    if (limits) {
+      try {
+        this.timeLimits = JSON.parse(limits);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+
   private onStart() {
     if (this.activeTimer === 0) {
       this.activeTimer = 1;
+      this.timeLimits[0] = this.leftTimer.timeLimit;
+      this.timeLimits[1] = this.rightTimer.timeLimit;
+      localStorage.setItem("timeLimits", JSON.stringify(this.timeLimits));
     }
     if (this.activeTimer >= 3) {
       this.activeTimer -= 2;
