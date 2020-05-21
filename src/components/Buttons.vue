@@ -1,23 +1,25 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col class="center" cols="3">
-        <v-btn fab dark v-bind="size" color="pink" @click="onStart">
-          <v-icon dark>mdi-play</v-icon>
-        </v-btn>
-      </v-col>
-      <v-col class="center" cols="3">
-        <v-btn fab dark v-bind="size" color="pink" @click="onPause">
-          <v-icon dark>mdi-pause</v-icon>
-        </v-btn>
-      </v-col>
-      <v-col class="center" cols="3">
-        <v-btn fab dark v-bind="size" color="pink" @click="onStop">
-          <v-icon dark>mdi-stop</v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-card>
+    <v-container>
+      <v-row justify="center">
+        <v-col class="center">
+          <v-btn fab dark v-bind="size" color="pink" @click="onStart">
+            <v-icon dark>mdi-play</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col class="center">
+          <v-btn fab dark v-bind="size" color="pink" @click="onPause">
+            <v-icon dark>mdi-pause</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col class="center">
+          <v-btn fab dark v-bind="size" color="pink" @click="onStop">
+            <v-icon dark>mdi-stop</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
 
 <script lang="ts">

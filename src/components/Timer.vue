@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="justify-center">
+    <v-card-title class="justify-center" v-bind:class="fontSize">
       {{ currentMinutes }} : {{ currentSeconds }}
     </v-card-title>
 
@@ -91,6 +91,20 @@ export default class Timer extends Vue {
 
   private get currentMinutes() {
     return ("0" + Math.floor(this.timerValue / 60)).slice(-2);
+  }
+
+  private get fontSize() {
+    const sizeMap: { [key: string]: string } = {
+      xs: "headline",
+      sm: "display-1",
+      md: "display-2",
+      lg: "display-3",
+      xl: "display-4",
+    };
+    const breakPoint: string = this.$vuetify.breakpoint.name;
+    const size: string | undefined = sizeMap[breakPoint];
+    console.log(size);
+    return size ? { [size]: true } : {};
   }
 
   private validateTime(time: number) {

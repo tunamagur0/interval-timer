@@ -1,10 +1,10 @@
 <template>
-  <v-container class="container" fill-height>
-    <v-row class="icon" justify="center">
+  <v-container fill-height>
+    <v-row justify="center">
       <v-icon large color="green darken-2">mdi-domain</v-icon>
     </v-row>
-    <v-row class="timer" justify="center">
-      <v-col cols="5">
+    <v-row justify="center">
+      <v-col md="4" cols="8">
         <Timer
           ref="leftTimer"
           :isActive="isLeftActive"
@@ -13,7 +13,7 @@
           @finish="onFinish"
         />
       </v-col>
-      <v-col cols="5">
+      <v-col md="4" cols="8">
         <Timer
           ref="rightTimer"
           :isActive="isRightActive"
@@ -23,8 +23,8 @@
         />
       </v-col>
     </v-row>
-    <v-row class="buttons" justify="center">
-      <v-col cols="6">
+    <v-row justify="center">
+      <v-col cols="6" md="4">
         <Buttons @start="onStart" @stop="onStop" @pause="onPause" />
       </v-col>
     </v-row>
@@ -100,20 +100,3 @@ export default class Main extends Vue {
   }
 }
 </script>
-
-<style scoped>
-/* #container {
-  width: 100%;
-  height: 100%;
-} */
-/* .icon {
-  height: 50%;
-}
-.timer {
-  height: 30%;
-}
-
-.buttons {
-  height: 20%;
-} */
-</style>
