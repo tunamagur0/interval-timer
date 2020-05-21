@@ -1,9 +1,23 @@
 <template>
-  <div class="container">
-    <button @click="onStart">start</button>
-    <button @click="onPause">pause</button>
-    <button @click="onStop">stop</button>
-  </div>
+  <v-container>
+    <v-row justify="center">
+      <v-col class="center" cols="3">
+        <v-btn fab dark v-bind="size" color="pink" @click="onStart">
+          <v-icon dark>mdi-play</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col class="center" cols="3">
+        <v-btn fab dark v-bind="size" color="pink" @click="onPause">
+          <v-icon dark>mdi-pause</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col class="center" cols="3">
+        <v-btn fab dark v-bind="size" color="pink" @click="onStop">
+          <v-icon dark>mdi-stop</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -22,11 +36,23 @@ export default class Buttons extends Vue {
   private onStop() {
     this.$emit("stop");
   }
+
+  private get size() {
+    const sizeMap: { [key: string]: string } = {
+      xs: "x-small",
+      sm: "small",
+      lg: "large",
+      xl: "x-large",
+    };
+    const breakPoint: string = this.$vuetify.breakpoint.name;
+    const size: string | undefined = sizeMap[breakPoint];
+    return size ? { [size]: true } : {};
+  }
 }
 </script>
 
 <style scoped>
-.container {
-  border: 1px solid black;
+.center {
+  text-align: center;
 }
 </style>

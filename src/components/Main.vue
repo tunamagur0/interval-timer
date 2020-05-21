@@ -1,21 +1,34 @@
 <template>
-  <div class="container">
-    <div class="timer-container">
-      <Timer
-        ref="leftTimer"
-        :isActive="isLeftActive"
-        :timeLimit="timeLimits[0]"
-        @finish="onFinish"
-      />
-      <Timer
-        ref="rightTimer"
-        :isActive="isRightActive"
-        :timeLimit="timeLimits[1]"
-        @finish="onFinish"
-      />
-    </div>
-    <Buttons @start="onStart" @stop="onStop" @pause="onPause" />
-  </div>
+  <v-container class="container" fill-height>
+    <v-row class="icon" justify="center">
+      <v-icon large color="green darken-2">mdi-domain</v-icon>
+    </v-row>
+    <v-row class="timer" justify="center">
+      <v-col cols="5">
+        <Timer
+          ref="leftTimer"
+          :isActive="isLeftActive"
+          :timeLimit="timeLimits[0]"
+          :canSetTime="canSetTime"
+          @finish="onFinish"
+        />
+      </v-col>
+      <v-col cols="5">
+        <Timer
+          ref="rightTimer"
+          :isActive="isRightActive"
+          :timeLimit="timeLimits[1]"
+          :canSetTime="canSetTime"
+          @finish="onFinish"
+        />
+      </v-col>
+    </v-row>
+    <v-row class="buttons" justify="center">
+      <v-col cols="6">
+        <Buttons @start="onStart" @stop="onStop" @pause="onPause" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -52,7 +65,8 @@ export default class Main extends Vue {
   }
 
   private onPause() {
-    this.activeTimer += 2;
+    if (this.activeTimer === 1 || this.activeTimer === 2) this.activeTimer += 2;
+    else if (this.activeTimer >= 3) this.activeTimer -= 2;
   }
 
   private onFinish() {
@@ -66,16 +80,26 @@ export default class Main extends Vue {
   private get isRightActive(): boolean {
     return this.activeTimer === 2;
   }
+
+  private get canSetTime(): boolean {
+    return this.activeTimer === 0;
+  }
 }
 </script>
 
 <style scoped>
-.container {
-  border: 1px solid black;
+/* #container {
+  width: 100%;
+  height: 100%;
+} */
+/* .icon {
+  height: 50%;
+}
+.timer {
+  height: 30%;
 }
 
-.timer-container {
-  display: flex;
-  justify-content: space-evenly;
-}
+.buttons {
+  height: 20%;
+} */
 </style>
