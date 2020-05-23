@@ -99,7 +99,7 @@ export default class Timer extends Vue {
       sm: "display-1",
       md: "display-2",
       lg: "display-3",
-      xl: "display-4",
+      xl: "display-4"
     };
     const breakPoint: string = this.$vuetify.breakpoint.name;
     const size: string | undefined = sizeMap[breakPoint];

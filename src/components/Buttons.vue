@@ -44,7 +44,7 @@ export default class Buttons extends Vue {
       xs: "x-small",
       sm: "small",
       lg: "large",
-      xl: "x-large",
+      xl: "x-large"
     };
     const breakPoint: string = this.$vuetify.breakpoint.name;
     const size: string | undefined = sizeMap[breakPoint];

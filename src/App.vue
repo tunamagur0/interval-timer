@@ -8,8 +8,8 @@ import Main from "./components/Main.vue";
 
 @Component({
   components: {
-    Main,
-  },
+    Main
+  }
 })
 export default class App extends Vue {}
 </script>

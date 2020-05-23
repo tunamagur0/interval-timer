@@ -39,8 +39,8 @@ import Timer from "./Timer.vue";
 @Component({
   components: {
     Buttons,
-    Timer,
-  },
+    Timer
+  }
 })
 export default class Main extends Vue {
   @Ref() readonly leftTimer!: Timer;
