@@ -45,17 +45,18 @@ export default class Timer extends Vue {
   private currentTime = 0;
   private timerId = -1;
   private showTimeSetting = false;
+  private music!: HTMLAudioElement;
 
   created() {
     this.timeLimit = this.timeLimitProps;
+    this.music = new Audio("sound/alarm.wav");
   }
 
   private start() {
     this.timerId = setInterval(() => {
       this.currentTime++;
       if (this.timerValue === -1) {
-        this.clear();
-        this.$emit("finish");
+        this.finish();
       }
     }, 1000);
   }
@@ -103,7 +104,6 @@ export default class Timer extends Vue {
     };
     const breakPoint: string = this.$vuetify.breakpoint.name;
     const size: string | undefined = sizeMap[breakPoint];
-    console.log(size);
     return size ? { [size]: true } : {};
   }
 
@@ -114,6 +114,12 @@ export default class Timer extends Vue {
   public clear() {
     this.currentTime = 0;
     this.stop();
+  }
+
+  private finish() {
+    this.clear();
+    this.music.play();
+    this.$emit("finish");
   }
 
   @Watch("isActive")
