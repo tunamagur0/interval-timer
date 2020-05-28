@@ -45,7 +45,7 @@ export default class Timer extends Vue {
   @Prop() private id!: ID;
   public timeLimit = 0;
   private currentTime = 0;
-  private timerId = -1;
+  private callbackId = -1;
   private showTimeSetting = false;
   private music!: HTMLAudioElement;
 
@@ -55,22 +55,31 @@ export default class Timer extends Vue {
   }
 
   private start() {
-    this.timerId = setInterval(() => {
-      this.currentTime++;
-      if (this.timerValue === -1) {
+    let previousTime = performance.now();
+    const callback: () => void = () => {
+      const now = performance.now();
+      const diff = Math.floor((now - previousTime) / 1000);
+
+      if (diff >= 1) {
+        previousTime = now;
+        this.currentTime += diff;
+        this.$store.commit("update", {
+          id: this.id,
+          time: this.timerValue
+        });
+      }
+      if (this.timerValue < 0) {
         this.finish();
         return;
       }
-      this.$store.commit("update", {
-        id: this.id,
-        time: this.timerValue
-      });
-    }, 1000);
+    };
+
+    this.callbackId = setInterval(callback, 100);
   }
 
   private stop() {
-    clearInterval(this.timerId);
-    this.timerId = -1;
+    clearInterval(this.callbackId);
+    this.callbackId = -1;
   }
 
   private get timerValue() {
