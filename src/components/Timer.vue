@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { ID } from "@/store/types";
 
 @Component
 export default class Timer extends Vue {
@@ -41,6 +42,7 @@ export default class Timer extends Vue {
   @Prop() private isActive!: boolean;
   // timeLimit[s]
   @Prop() private timeLimitProps!: number;
+  @Prop() private id!: ID;
   public timeLimit = 0;
   private currentTime = 0;
   private timerId = -1;
@@ -57,7 +59,12 @@ export default class Timer extends Vue {
       this.currentTime++;
       if (this.timerValue === -1) {
         this.finish();
+        return;
       }
+      this.$store.commit("update", {
+        id: this.id,
+        time: this.timerValue
+      });
     }, 1000);
   }
 
@@ -119,6 +126,10 @@ export default class Timer extends Vue {
   private finish() {
     this.clear();
     this.music.play();
+    this.$store.commit("update", {
+      id: this.id,
+      time: this.timerValue
+    });
     this.$emit("finish");
   }
 

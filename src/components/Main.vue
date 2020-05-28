@@ -10,6 +10,7 @@
           :isActive="isLeftActive"
           :timeLimitProps="timeLimits[0]"
           :canSetTime="canSetTime"
+          id="left"
           @finish="onFinish"
         />
       </v-col>
@@ -19,6 +20,7 @@
           :isActive="isRightActive"
           :timeLimitProps="timeLimits[1]"
           :canSetTime="canSetTime"
+          id="right"
           @finish="onFinish"
         />
       </v-col>
