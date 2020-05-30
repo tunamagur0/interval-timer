@@ -6,12 +6,12 @@ import mutations from "./mutations";
 const state: RootState = {
   left: -1,
   right: -1,
-  isStarted: false,
+  isStarted: false
 };
 
 const store: StoreOptions<RootState> = {
   state,
-  mutations,
+  mutations
 };
 
 Vue.use(Vuex);

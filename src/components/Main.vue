@@ -43,8 +43,8 @@ import Animation from "./Animation.vue";
   components: {
     Buttons,
     Timer,
-    Animation,
-  },
+    Animation
+  }
 })
 export default class Main extends Vue {
   @Ref() readonly leftTimer!: Timer;

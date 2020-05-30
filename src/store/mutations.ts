@@ -12,7 +12,7 @@ const mutations: MutationTree<RootState> = {
 
   updateStartState: (state: RootState, isStarted: boolean) => {
     state.isStarted = isStarted;
-  },
+  }
 };
 
 export default mutations;

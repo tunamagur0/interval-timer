@@ -66,7 +66,7 @@ export default class Timer extends Vue {
         this.currentTime += diff;
         this.$store.commit("update", {
           id: this.id,
-          time: this.timerValue,
+          time: this.timerValue
         });
       }
       if (this.timerValue < 0) {
@@ -117,7 +117,7 @@ export default class Timer extends Vue {
       sm: "display-1",
       md: "display-2",
       lg: "display-3",
-      xl: "display-4",
+      xl: "display-4"
     };
     const breakPoint: string = this.$vuetify.breakpoint.name;
     const size: string | undefined = sizeMap[breakPoint];
@@ -138,7 +138,7 @@ export default class Timer extends Vue {
     this.music.play();
     this.$store.commit("update", {
       id: this.id,
-      time: this.timerValue,
+      time: this.timerValue
     });
     this.$emit("finish");
   }
