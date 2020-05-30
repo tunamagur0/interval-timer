@@ -1,6 +1,7 @@
 export interface RootState {
   left: number;
   right: number;
+  isStarted: boolean;
 }
 
 export type ID = "left" | "right";

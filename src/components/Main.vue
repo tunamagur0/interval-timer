@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height>
     <v-row justify="center">
-      <v-icon large color="green darken-2">mdi-domain</v-icon>
+      <Animation />
     </v-row>
     <v-row justify="center">
       <v-col md="4" cols="8">
@@ -37,12 +37,14 @@
 import { Component, Vue, Ref } from "vue-property-decorator";
 import Buttons from "./Buttons.vue";
 import Timer from "./Timer.vue";
+import Animation from "./Animation.vue";
 
 @Component({
   components: {
     Buttons,
-    Timer
-  }
+    Timer,
+    Animation,
+  },
 })
 export default class Main extends Vue {
   @Ref() readonly leftTimer!: Timer;
@@ -78,11 +80,13 @@ export default class Main extends Vue {
     this.leftTimer.clear();
     this.rightTimer.clear();
     this.activeTimer = 0;
+    this.$store.commit("updateStartState", false);
   }
 
   private onPause() {
     if (this.activeTimer === 1 || this.activeTimer === 2) this.activeTimer += 2;
     else if (this.activeTimer >= 3) this.activeTimer -= 2;
+    this.$store.commit("updateStartState", false);
   }
 
   private onFinish() {
