@@ -1,24 +1,13 @@
-# interval-timer
+![demo](/screenshot.gif?raw=true, "demo")
 
-## Project setup
-```
-yarn install
-```
+# インターバルタイマー
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+ブラウザ上で動作するインターバルタイマーです。
 
-### Compiles and minifies for production
-```
-yarn build
-```
+https://interval-t-timer.web.app/
 
-### Lints and fixes files
-```
-yarn lint
-```
+### 技術的なこと
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Vue.js
+- PWA
+- Responsive design
